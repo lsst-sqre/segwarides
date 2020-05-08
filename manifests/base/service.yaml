@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: segwarides
+  labels:
+    app: segwarides
+spec:
+  ports:
+    - name: segwarides-http
+      protocol: TCP
+      port: 8080
+      targetPort: app
+  selector:
+    name: segwarides
