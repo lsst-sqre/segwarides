@@ -33,3 +33,9 @@ class Configuration:
 
     Set with the ``SAFIR_LOG_LEVEL`` environment variable.
     """
+
+    credential_path: str = os.getenv("CREDENTIAL_PATH", "UNKNOWN")
+    """Path to the location of the files with credentials
+
+    Set with the ``CREDENTIAL_PATH`` environment variable.
+    """
