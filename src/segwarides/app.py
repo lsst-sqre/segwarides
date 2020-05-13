@@ -27,6 +27,8 @@ def create_app() -> web.Application:
 
     root_app = web.Application()
     root_app["safir/config"] = config
+    root_app["segwarides/creds_getter"] = get_credentials_by_key
+    root_app["segwarides/creds_mapper_maker"] = make_credential_map
     setup_metadata(package_name="segwarides", app=root_app)
     setup_middleware(root_app)
     root_app.add_routes(init_internal_routes())
