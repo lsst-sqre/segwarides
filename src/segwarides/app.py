@@ -9,6 +9,10 @@ from safir.metadata import setup_metadata
 from safir.middleware import bind_logger
 
 from segwarides.config import Configuration
+from segwarides.credential_mapper import (
+    get_credentials_by_key,
+    make_credential_map,
+)
 from segwarides.handlers import init_external_routes, init_internal_routes
 
 
