@@ -5,6 +5,8 @@ __all__ = [
     "get_json_credential",
 ]
 
+import json
+
 from aiohttp import web
 
 from segwarides.handlers import routes
@@ -20,7 +22,13 @@ async def get_credentials_list(request: web.Request) -> web.Response:
     credentials_map = request.config_dict["segwarides/creds_mapper_maker"](
         config
     )
-    return web.json_response(list(credentials_map.keys()))
+    return web.json_response(
+        [
+            k
+            for k in credentials_map.keys()
+            if not isinstance(credentials_map[k], json.decoder.JSONDecodeError)
+        ]
+    )
 
 
 @routes.get("/creds/{credential_key}")
@@ -34,6 +42,9 @@ async def get_json_credential(request: web.Request) -> web.Response:
     config = request.config_dict["safir/config"]
     try:
         creds = request.config_dict["segwarides/creds_getter"](key, config)
+        if isinstance(creds, json.decoder.JSONDecodeError):
+            msg = f"Unable to decode credentials JSON document"
+            return web.Response(status=500, text=msg)
         return web.json_response(creds)
     except KeyError:
         msg = f"No credentials four {key}."
