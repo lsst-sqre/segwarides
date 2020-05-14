@@ -28,5 +28,5 @@ def make_credential_map(config: Configuration) -> Dict[str, Dict[str, str]]:
         if f.is_dir():
             continue
         with open(f, "r") as fh:
-            mapper[str(f)] = json.load(fh)
+            mapper[f.parts[-1]] = json.load(fh)
     return mapper
