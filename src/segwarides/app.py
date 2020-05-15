@@ -2,6 +2,8 @@
 
 __all__ = ["create_app"]
 
+from typing import Any
+
 from aiohttp import web
 from safir.http import init_http_session
 from safir.logging import configure_logging
@@ -16,9 +18,9 @@ from segwarides.credential_mapper import (
 from segwarides.handlers import init_external_routes, init_internal_routes
 
 
-def create_app() -> web.Application:
+def create_app(**configs: Any) -> web.Application:
     """Create and configure the aiohttp.web application."""
-    config = Configuration()
+    config = Configuration(**configs)
     configure_logging(
         profile=config.profile,
         log_level=config.log_level,

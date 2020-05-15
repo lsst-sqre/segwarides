@@ -2,15 +2,10 @@
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 from segwarides.app import create_app
-
-# Set up path to test credentials
-os.environ["CREDENTIAL_PATH"] = str(Path(__file__).parents[1] / "secret")
-
 
 if TYPE_CHECKING:
     from aiohttp.pytest_plugin.test_utils import TestClient
@@ -18,7 +13,7 @@ if TYPE_CHECKING:
 
 async def test_get_list(aiohttp_client: TestClient) -> None:
     """Test GET /segwarides/list"""
-    app = create_app()
+    app = create_app(credential_path=str(Path(__file__).parents[1] / "secret"))
     name = app["safir/config"].name
     client = await aiohttp_client(app)
 
