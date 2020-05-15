@@ -47,5 +47,5 @@ async def get_json_credential(request: web.Request) -> web.Response:
             return web.Response(status=500, text=msg)
         return web.json_response(creds)
     except KeyError:
-        msg = f"No credentials four {key}."
+        msg = f"No credentials for {key}."
         return web.Response(status=404, text=msg)
