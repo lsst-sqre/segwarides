@@ -10,8 +10,7 @@ We would like these credentials to be easy to obtain and easy to update without 
 There are other low risk services for wich we do not control authentication where a service for providing credentials may be useful.
 An example may be a centralized logging service.
 
-This is an Rubin Observatory DM SQuaRE api.lsst.codes microservice, developed with the `Safir <https://safir.lsst.io>`__ framework.
-`Get started with development with the tutorial <https://safir.lsst.io/set-up-from-template.html>`__.
+This is a Rubin Observatory DM SQuaRE microservice, developed with the `Safir <https://safir.lsst.io>`__ framework and hosted on `Roundtable <https://roundtable.lsst.io>`__.
 
 Usage
 =====
@@ -63,7 +62,7 @@ So, for example, one can wrap this deployment in a Kustomization resource such a
    kind: Kustomization
 
    resources:
-     - github.com/lsst-sqre/segwarides git//manifests/base?ref=0.3.0
+     - github.com/lsst-sqre/segwarides.git//manifests/base?ref=0.1.0
      - resources/secret.yaml
 
 where ``resources/secret.yaml`` provides the required Kubernetes ``Secret`` resource via some local mechanism.
