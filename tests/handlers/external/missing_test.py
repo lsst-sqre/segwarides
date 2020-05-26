@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 async def test_get_missing_cred(aiohttp_client: TestClient) -> None:
     """Test GET /segwarides/creds/missing"""
-    app = create_app(credential_path=str(Path(__file__).parents[1] / "secret"))
+    app = create_app(credential_path=Path(__file__).parents[1] / "secret")
     name = app["safir/config"].name
     client = await aiohttp_client(app)
 

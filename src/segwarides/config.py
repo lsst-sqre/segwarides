@@ -4,6 +4,7 @@ __all__ = ["Configuration"]
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass
@@ -34,7 +35,7 @@ class Configuration:
     Set with the ``SAFIR_LOG_LEVEL`` environment variable.
     """
 
-    credential_path: str = os.getenv("CREDENTIAL_PATH", "UNKNOWN")
+    credential_path: Path = Path(os.getenv("CREDENTIAL_PATH", "UNKNOWN"))
     """Path to the location of the files with credentials.
 
     Set with the ``CREDENTIAL_PATH`` environment variable.

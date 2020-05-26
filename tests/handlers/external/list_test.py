@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 async def test_get_list(aiohttp_client: TestClient) -> None:
     """Test GET /segwarides/list"""
-    app = create_app(credential_path=str(Path(__file__).parents[1] / "secret"))
+    app = create_app(credential_path=Path(__file__).parents[1] / "secret")
     name = app["safir/config"].name
     client = await aiohttp_client(app)
 

@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-import pathlib
 from collections.abc import Mapping
 from typing import TYPE_CHECKING
 
@@ -50,14 +49,13 @@ class CredentialMapper(Mapping):
         return len(self.mapper)
 
     def _refresh(self) -> None:
-        path = pathlib.Path(self.config.credential_path)
+        path = self.config.credential_path
         mapper = {}
         for f in path.iterdir():
             if f.is_dir():
                 continue
-            with open(f, "r") as fh:
-                try:
-                    mapper[f.parts[-1]] = json.load(fh)
-                except json.decoder.JSONDecodeError as e:
-                    mapper[f.parts[-1]] = e
+            try:
+                mapper[f.parts[-1]] = json.loads(f.read_text())
+            except json.decoder.JSONDecodeError as e:
+                mapper[f.parts[-1]] = e
         self.mapper = mapper

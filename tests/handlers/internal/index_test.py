@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from segwarides.app import create_app
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
 
 async def test_get_index(aiohttp_client: TestClient) -> None:
     """Test GET /"""
-    app = create_app()
+    app = create_app(credential_path=Path(__file__).parents[1] / "secret")
     client = await aiohttp_client(app)
 
     response = await client.get("/")
