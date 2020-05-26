@@ -18,15 +18,12 @@ async def get_credentials_list(request: web.Request) -> web.Response:
 
     Response is a JSON list of valid keys to use with this service.
     """
-    config = request.config_dict["safir/config"]
-    credentials_map = request.config_dict["segwarides/creds_mapper_maker"](
-        config
-    )
+    credentials_map = request.config_dict["segwarides/creds_mapper"]
     return web.json_response(
         [
             k
-            for k in credentials_map.keys()
-            if not isinstance(credentials_map[k], json.decoder.JSONDecodeError)
+            for k, v in credentials_map.items()
+            if not isinstance(v, json.decoder.JSONDecodeError)
         ]
     )
 
@@ -39,9 +36,8 @@ async def get_json_credential(request: web.Request) -> web.Response:
     corresponds to valid credentials.  Otherwise, returns 404.
     """
     key = request.match_info["credential_key"]
-    config = request.config_dict["safir/config"]
     try:
-        creds = request.config_dict["segwarides/creds_getter"](key, config)
+        creds = request.config_dict["segwarides/creds_mapper"][key]
         if isinstance(creds, json.decoder.JSONDecodeError):
             msg = f"Unable to decode credentials JSON document"
             return web.Response(status=500, text=msg)

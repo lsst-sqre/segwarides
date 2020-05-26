@@ -11,10 +11,7 @@ from safir.metadata import setup_metadata
 from safir.middleware import bind_logger
 
 from segwarides.config import Configuration
-from segwarides.credential_mapper import (
-    get_credentials_by_key,
-    make_credential_map,
-)
+from segwarides.credential_mapper import CredentialMapper
 from segwarides.handlers import init_external_routes, init_internal_routes
 
 
@@ -27,10 +24,11 @@ def create_app(**configs: Any) -> web.Application:
         name=config.logger_name,
     )
 
+    mapper = CredentialMapper(config)
+
     root_app = web.Application()
     root_app["safir/config"] = config
-    root_app["segwarides/creds_getter"] = get_credentials_by_key
-    root_app["segwarides/creds_mapper_maker"] = make_credential_map
+    root_app["segwarides/creds_mapper"] = mapper
     setup_metadata(package_name="segwarides", app=root_app)
     setup_middleware(root_app)
     root_app.add_routes(init_internal_routes())
