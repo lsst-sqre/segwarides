@@ -25,3 +25,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: segwarides
+          volumeMounts:
+            - name: creds
+              mountPath: "/etc/segwarides/creds"
+              readOnly: true
+      volumes:
+        - name: creds
+          secret: segwarides

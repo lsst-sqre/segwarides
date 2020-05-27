@@ -9,3 +9,4 @@ data:
   SAFIR_PROFILE: "production"
   SAFIR_LOGGER: "segwarides"
   SAFIR_LOG_LEVEL: "INFO"
+  CREDENTIAL_PATH: "/etc/segwarides/creds"
