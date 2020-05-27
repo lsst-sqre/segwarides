@@ -15,7 +15,7 @@ spec:
         name: segwarides
     spec:
       containers:
-        - name: app
+        - name: segwarides
           imagePullPolicy: "Always"
           # Use images field in a Kustomization to regularly set/update image tag
           image: "lsstsqre/segwarides"
