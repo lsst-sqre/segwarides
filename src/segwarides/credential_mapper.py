@@ -51,16 +51,17 @@ class CredentialMapper(Mapping):
     def _refresh(self) -> None:
         path = self.config.credential_path
         mapper = {}
-        for f in path.iterdir():
-            if f.is_dir():
-                continue
-            try:
-                mapper[f.parts[-1]] = json.loads(f.read_text())
-            except json.decoder.JSONDecodeError as e:
-                # This intentionally does not raise, but saves the exception
-                # so that the handler can raise a useful error message if
-                # the malformed credential is requested.
-                # Otherwise, no credentials would be available if any
-                # credential was malformed.
-                mapper[f.parts[-1]] = e
+        if path is not None:
+            for f in path.iterdir():
+                if f.is_dir():
+                    continue
+                try:
+                    mapper[f.parts[-1]] = json.loads(f.read_text())
+                except json.decoder.JSONDecodeError as e:
+                    # This intentionally does not raise, but saves the
+                    # exception so that the handler can raise a useful
+                    # error message if the malformed credential is requested.
+                    # Otherwise, no credentials would be available if any
+                    # credential was malformed.
+                    mapper[f.parts[-1]] = e
         self.mapper = mapper
