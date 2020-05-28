@@ -31,4 +31,5 @@ spec:
               readOnly: true
       volumes:
         - name: creds
-          secret: segwarides
+          secret:
+            secretName: segwarides
