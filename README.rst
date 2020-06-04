@@ -47,6 +47,35 @@ Routes
   A 404 is returned if there are no credentials for ``<service_name>``.
   A 500 is returned if the service cannot decode the credentials from disk using ``json.load``.
 
+Adding Credentials
+------------------
+
+Credentials are served from `Vault <https://www.vaultproject.io/>`__.
+The SQuaRE vault service is served from roundtable.
+Check 1Password for the relevant credentials.
+
+In order to add a credential, a new key must be added to the ``secret/k8s_operator/roundtable/segwarides/creds`` secret.
+The value of the key is a valid JSON document containing the credentials.
+The credentials can specify any number of key/value pairs, but for EFD credentials ``host``, ``username``, and ``password`` are expected.
+It is assumed this same mechanism can be extended to serve e.g. access tokens as well as username/password pairs.
+An example valid document is:
+
+.. code::
+
+  '{"host": "service.endpoint.org", "username": "swordfish", "password": "12345"}'
+
+Since we are using `K/V Version 2 <https://www.vaultproject.io/docs/secrets/kv/kv-v2>`__ we will use the `vault kv patch <https://www.vaultproject.io/docs/commands/kv/patch>`__ command to add credentials to the secret.
+Putting it all together, adding a credential looks something like the following:
+
+.. code::
+
+  export VAULT_ADDR=https://secret.vault.location.codes
+  export VAULT_TOKEN=<super secret vault token>
+  vault kv patch secret/k8s_operator/roundtable/segwarides/creds some_service_name='{"host": "service.endpoint.org", "username": "swordfish", "password": "12345"}'
+
+Segwarides will automatically pick up the change as it re-reads the secret any time a request is made.
+Though it may take some time for the kubernetes secret to be refreshed.
+
 Deployment
 ==========
 
