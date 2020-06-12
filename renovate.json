@@ -1,5 +1,21 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "packageRules": [
+    {
+      "groupName": "Python dependencies",
+      "languages": [
+        "python"
+      ]
+    }
+  ],
+  "pip_requirements": {
+    "fileMatch": [
+      "requirements/.*\\.txt"
+    ]
+  },
+  "pipenv": {
+    "enabled": true
+  }
 }
