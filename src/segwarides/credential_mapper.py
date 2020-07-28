@@ -8,13 +8,7 @@ from typing import TYPE_CHECKING
 from segwarides.config import Configuration
 
 if TYPE_CHECKING:
-    from typing import (
-        Dict,
-        Iterator,
-        ValuesView,
-        KeysView,
-        ItemsView,
-    )
+    from typing import Dict, ItemsView, Iterator, KeysView, ValuesView
 
 __all__ = ["CredentialMapper"]
 

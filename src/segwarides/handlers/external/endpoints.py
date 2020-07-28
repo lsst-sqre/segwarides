@@ -39,7 +39,7 @@ async def get_json_credential(request: web.Request) -> web.Response:
     try:
         creds = request.config_dict["segwarides/creds_mapper"][key]
         if isinstance(creds, json.decoder.JSONDecodeError):
-            msg = f"Unable to decode credentials JSON document"
+            msg = "Unable to decode credentials JSON document"
             return web.Response(status=500, text=msg)
         return web.json_response(creds)
     except KeyError:
