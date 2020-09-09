@@ -36,9 +36,11 @@ class Configuration:
     Set with the ``SAFIR_LOG_LEVEL`` environment variable.
     """
 
-    credential_path: Optional[Path] = None if os.getenv(
-        "CREDENTIAL_PATH"
-    ) is None else Path(os.environ["CREDENTIAL_PATH"])
+    credential_path: Optional[Path] = (
+        None
+        if os.getenv("CREDENTIAL_PATH") is None
+        else Path(os.environ["CREDENTIAL_PATH"])
+    )
     """Path to the location of the files with credentials.
 
     Set with the ``CREDENTIAL_PATH`` environment variable.
