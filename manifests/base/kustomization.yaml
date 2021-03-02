@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
   - name: lsstsqre/segwarides
-    newTag: 0.4.1
+    newTag: 0.4.2
 
 resources:
   - configmap.yaml
