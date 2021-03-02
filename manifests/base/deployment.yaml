@@ -14,6 +14,7 @@ spec:
       labels:
         name: segwarides
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: segwarides
           imagePullPolicy: "Always"
@@ -25,10 +26,20 @@ spec:
           envFrom:
             - configMapRef:
                 name: segwarides
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            readOnlyRootFilesystem: true
           volumeMounts:
             - name: creds
               mountPath: "/etc/segwarides/creds"
               readOnly: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
       volumes:
         - name: creds
           secret:
