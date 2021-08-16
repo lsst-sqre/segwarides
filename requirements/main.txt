@@ -147,9 +147,9 @@ idna==3.2 \
     --hash=sha256:14475042e284991034cb48e06f6851428fb14c4dc953acd9be9a5e95c7b6dd7a \
     --hash=sha256:467fbad99067910785144ce333826c71fb0e63a425657295239737f7ecd125f3
     # via yarl
-importlib-metadata==4.6.3 \
-    --hash=sha256:0645585859e9a6689c523927a5032f2ba5919f1f7d0e84bd4533312320de1ff9 \
-    --hash=sha256:51c6635429c77cf1ae634c997ff9e53ca3438b495f10a55ba28594dd69764a8b
+importlib-metadata==4.6.4 \
+    --hash=sha256:7b30a78db2922d78a6f47fb30683156a14f3c6aa5cc23f77cc8967e9ab2d002f \
+    --hash=sha256:ed5157fef23a4bc4594615a0dd8eba94b2bb36bf2a343fa3d8bb2fa0a62a99d5
     # via -r requirements/main.in
 multidict==5.1.0 \
     --hash=sha256:018132dbd8688c7a69ad89c4a3f39ea2f9f33302ebe567a879da8f4ca73f0d0a \
